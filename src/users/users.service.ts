@@ -8,6 +8,8 @@ import { genSaltSync, hashSync, compareSync } from 'bcryptjs';
 import { SoftDeleteModel } from 'soft-delete-plugin-mongoose';
 import { IUser } from './users.interface';
 import aqp from 'api-query-params';
+import { Role, RoleDocument } from 'src/roles/schemas/role.schema';
+import { USER_ROLE } from 'src/databases/sample';
 
 
 @Injectable()
@@ -15,6 +17,8 @@ export class UsersService {
   constructor(
     @InjectModel(User.name)
     private userModel: SoftDeleteModel<UserDocument>,
+    @InjectModel(Role.name)
+    private roleModel: SoftDeleteModel<RoleDocument>,
   ) { }
 
   hassPassword = (inputPassword: string) => {
@@ -52,11 +56,12 @@ export class UsersService {
       throw new BadRequestException(`Số điện thoại : ${registerUserInfo.phone} đã tồn tại !`);
     }
     const hassPassword = this.hassPassword(registerUserInfo.password)
+    const userRole = await this.roleModel.findOne({ name: USER_ROLE })
     const userData = await this.userModel.create({
       name: registerUserInfo.name,
       phone: registerUserInfo.phone,
       password: hassPassword,
-      role: "USER"
+      role: userRole?._id
     })
     return userData;
   }
@@ -97,7 +102,8 @@ export class UsersService {
   }
 
   findOneByUsername(phone: string) {
-    return this.userModel.findOne({ phone })
+    const response = this.userModel.findOne({ phone }).populate({ path: "role", select: { name: 1 } })
+    return response
   }
 
   checkUserPassword(password: string, hashPass: string) {

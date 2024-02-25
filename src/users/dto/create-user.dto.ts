@@ -1,4 +1,5 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsMongoId, IsNotEmpty } from 'class-validator';
+import mongoose from 'mongoose';
 
 export class CreateUserDto {
     @IsNotEmpty({ message: 'Name không được để trống !' })
@@ -11,7 +12,8 @@ export class CreateUserDto {
     password: string;
 
     @IsNotEmpty()
-    role: string;
+    @IsMongoId()
+    role: mongoose.Schema.Types.ObjectId;
 }
 
 export class RegisterUserDto {

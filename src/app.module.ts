@@ -10,6 +10,8 @@ import { FilesModule } from './files/files.module';
 import { DatabasesModule } from './databases/databases.module';
 import { AccommodationModule } from './accommodation/accommodation.module';
 import { ExcelModule } from './excel/excel.module';
+import { PermissionsModule } from './permissions/permissions.module';
+import { RolesModule } from './roles/roles.module';
 
 
 @Module({
@@ -34,6 +36,8 @@ import { ExcelModule } from './excel/excel.module';
     DatabasesModule,
     AccommodationModule,
     ExcelModule,
+    PermissionsModule,
+    RolesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

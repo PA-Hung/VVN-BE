@@ -36,7 +36,7 @@ async function bootstrap() {
   );
 
   // config vesioning
-  app.setGlobalPrefix('chp/api');
+  app.setGlobalPrefix('api');
   app.enableVersioning({
     type: VersioningType.URI,
     defaultVersion: ['1']

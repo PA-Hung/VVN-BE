@@ -75,54 +75,54 @@ export class ExcelService {
   }
 
   async exportExcel(userInfo: IUser) {
-    try {
-      // Retrieve data from MongoDB
-      const checkAdmin = userInfo.role
-      const userIdToSearch = checkAdmin !== 'ADMIN' ? userInfo._id : undefined;
-      let query = {};
-      if (userIdToSearch !== undefined) {
-        query = { userId: userIdToSearch };
-      }
-      const accommodations = await this.AccommodationModel.find(query).exec();
+    // try {
+    //   // Retrieve data from MongoDB
+    //   const checkAdmin = userInfo.role
+    //   const userIdToSearch = checkAdmin !== 'ADMIN' ? userInfo._id : undefined;
+    //   let query = {};
+    //   if (userIdToSearch !== undefined) {
+    //     query = { userId: userIdToSearch };
+    //   }
+    //   const accommodations = await this.AccommodationModel.find(query).exec();
 
-      // chuyển định dạng ngày tháng năm chuẩn ISO8601 thành DD/MM/YYY
-      const formatDate = (date: Date) => {
-        return dayjs(date).format('DD/MM/YYYY');
-      }
+    //   // chuyển định dạng ngày tháng năm chuẩn ISO8601 thành DD/MM/YYY
+    //   const formatDate = (date: Date) => {
+    //     return dayjs(date).format('DD/MM/YYYY');
+    //   }
 
-      let stt = 1; // Biến đếm số thứ tự
-      // Prepare worksheet data, handling dates appropriately
-      const worksheetData = accommodations.map((accommodation) => ({
-        'STT': stt++,
-        'Họ và tên (*)': accommodation.name,
-        'Ngày, tháng, năm sinh (*)': formatDate(accommodation.birthday),
-        'Giới tính (*)': accommodation.gender,
-        'CMND/ CCCD/ Số định danh (*)': accommodation.identification_number,
-        'Số hộ chiếu (*)': accommodation.passport,
-        'Giấy tờ khác (*)': accommodation.documents,
-        'Số điện thoại': accommodation.phone,
-        'Nghề nghiệp': accommodation.job,
-        'Nơi làm việc': accommodation.workplace,
-        'Dân tộc': accommodation.ethnicity,
-        'Quốc tịch (*)': accommodation.nationality,
-        'Địa chỉ – Quốc gia (*)': accommodation.country,
-        'Địa chỉ – Tỉnh thành': accommodation.province,
-        'Địa chỉ – Quận huyện': accommodation.district,
-        'Địa chỉ – Phường xã': accommodation.ward,
-        'Địa chỉ – Số nhà': accommodation.address,
-        'Loại cư trú (*)': accommodation.residential_status,
-        'Thời gian lưu trú (đến ngày) (*)': formatDate(accommodation.arrival),
-        'Thời gian lưu trú (đi ngày)': accommodation.departure ? formatDate(accommodation.departure) : '',
-        'Lý do lưu trú': accommodation.reason,
-        'Số phòng/Mã căn hộ': accommodation.apartment,
-        // Add other fields as needed
-      }));
+    //   let stt = 1; // Biến đếm số thứ tự
+    //   // Prepare worksheet data, handling dates appropriately
+    //   const worksheetData = accommodations.map((accommodation) => ({
+    //     'STT': stt++,
+    //     'Họ và tên (*)': accommodation.name,
+    //     'Ngày, tháng, năm sinh (*)': formatDate(accommodation.birthday),
+    //     'Giới tính (*)': accommodation.gender,
+    //     'CMND/ CCCD/ Số định danh (*)': accommodation.identification_number,
+    //     'Số hộ chiếu (*)': accommodation.passport,
+    //     'Giấy tờ khác (*)': accommodation.documents,
+    //     'Số điện thoại': accommodation.phone,
+    //     'Nghề nghiệp': accommodation.job,
+    //     'Nơi làm việc': accommodation.workplace,
+    //     'Dân tộc': accommodation.ethnicity,
+    //     'Quốc tịch (*)': accommodation.nationality,
+    //     'Địa chỉ – Quốc gia (*)': accommodation.country,
+    //     'Địa chỉ – Tỉnh thành': accommodation.province,
+    //     'Địa chỉ – Quận huyện': accommodation.district,
+    //     'Địa chỉ – Phường xã': accommodation.ward,
+    //     'Địa chỉ – Số nhà': accommodation.address,
+    //     'Loại cư trú (*)': accommodation.residential_status,
+    //     'Thời gian lưu trú (đến ngày) (*)': formatDate(accommodation.arrival),
+    //     'Thời gian lưu trú (đi ngày)': accommodation.departure ? formatDate(accommodation.departure) : '',
+    //     'Lý do lưu trú': accommodation.reason,
+    //     'Số phòng/Mã căn hộ': accommodation.apartment,
+    //     // Add other fields as needed
+    //   }));
 
-      return worksheetData; //Assuming you have a filename set in the response object
+    //   return worksheetData; //Assuming you have a filename set in the response object
 
-    } catch (error) {
-      return { success: false, error: 'Error exporting Excel file', details: error.message };
-    }
+    // } catch (error) {
+    //   return { success: false, error: 'Error exporting Excel file', details: error.message };
+    // }
   }
 
   create(createExcelDto: CreateExcelDto) {
