@@ -118,17 +118,6 @@ export class UsersService {
   }
 
   async update(updateUserData: UpdateUserDto, user: IUser) {
-    const checkName = await this.userModel.findOne({ name: updateUserData.name });
-
-    if (checkName && checkName._id.toString() !== updateUserData._id) {
-      throw new BadRequestException(`Tên : ${updateUserData.name} đã tồn tại!`);
-    }
-
-    const checkPhone = await this.userModel.findOne({ phone: updateUserData.phone });
-
-    if (checkPhone && checkPhone._id.toString() !== updateUserData._id) {
-      throw new BadRequestException(`Số điện thoại : ${updateUserData.phone} đã tồn tại!`);
-    }
     const updated = await this.userModel.updateOne(
       { _id: updateUserData._id },
       {
