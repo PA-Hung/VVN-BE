@@ -21,6 +21,27 @@ export class User {
     @Prop()
     refreshToken: string;
 
+    @Prop()
+    gender: string;
+
+    @Prop()
+    birthday: Date;
+
+    @Prop()
+    level: string;
+
+    @Prop()
+    academic: string;
+
+    @Prop()
+    experience: string;
+
+    @Prop()
+    achievements: string;
+
+    @Prop()
+    address: string;
+
     @Prop({ type: Object })
     createdBy: {
         _id: mongoose.Schema.Types.ObjectId,

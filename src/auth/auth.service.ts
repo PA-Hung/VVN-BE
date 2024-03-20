@@ -49,7 +49,7 @@ export class AuthService {
         // set refresh token as cookies
         response.cookie('refresh_token', refresh_token, {
             httpOnly: true,
-            maxAge: ms(this.configService.get<string>('JWT_REFRESH_EXPIRE')) // ms để chuyển đổi sang mili giây
+            maxAge: ms(this.configService.get<string>('VVN_JWT_REFRESH_EXPIRE')) // ms để chuyển đổi sang mili giây
         })
 
         return {
@@ -74,8 +74,8 @@ export class AuthService {
 
     createRefreshToken = (payload: any) => {
         const refreshToken = this.jwtService.sign(payload, {
-            secret: this.configService.get<string>('JWT_REFRESH_TOKEN_SECRET'),
-            expiresIn: this.configService.get<string>('JWT_REFRESH_EXPIRE'),
+            secret: this.configService.get<string>('VVN_JWT_REFRESH_TOKEN_SECRET'),
+            expiresIn: this.configService.get<string>('VVN_JWT_REFRESH_EXPIRE'),
         })
         return refreshToken
     }
@@ -83,7 +83,7 @@ export class AuthService {
     refreshTokenService = async (refreshToken: string, response: Response) => {
         try {
             this.jwtService.verify(refreshToken, {
-                secret: this.configService.get<string>('JWT_REFRESH_TOKEN_SECRET')
+                secret: this.configService.get<string>('VVN_JWT_REFRESH_TOKEN_SECRET')
             })
             const user = await this.usersService.findUserByToken(refreshToken)
             if (user) {
@@ -107,7 +107,7 @@ export class AuthService {
                 response.clearCookie('refresh_token')
                 response.cookie('refresh_token', refresh_token, {
                     httpOnly: true,
-                    maxAge: ms(this.configService.get<string>('JWT_REFRESH_EXPIRE')) // ms để chuyển đổi sang mili giây
+                    maxAge: ms(this.configService.get<string>('VVN_JWT_REFRESH_EXPIRE')) // ms để chuyển đổi sang mili giây
                 })
 
                 return {

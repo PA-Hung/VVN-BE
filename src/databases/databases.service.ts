@@ -69,7 +69,14 @@ export class DatabasesService implements OnModuleInit {
                         name: "Phan Anh Khoa",
                         phone: "0377832014",
                         password: this.userService.hassPassword(this.configService.get<string>("INIT_PASSWORD")),
-                        role: userRole?._id
+                        role: userRole?._id,
+                        gender: 'Nam',
+                        birthday: '',
+                        level: 'Lam đai II',
+                        academic: 'lớp 4',
+                        experience: '4 năm',
+                        achievements: 'Chưa có',
+                        address: 'Chung Cư Melody, 101/4 Võ Thị Sáu, Phường Thắng Tam, BRVT'
                     },
                     {
                         name: "Thanh Châu",

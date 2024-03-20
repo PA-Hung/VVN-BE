@@ -42,6 +42,13 @@ export class UsersService {
       password: hassPassword,
       name: createUserData.name,
       role: createUserData.role,
+      gender: createUserData.gender,
+      birthday: createUserData.birthday,
+      level: createUserData.level,
+      academic: createUserData.academic,
+      experience: createUserData.experience,
+      achievements: createUserData.achievements,
+      address: createUserData.address,
       createdBy: {
         _id: userAuthInfo._id,
         phone: userAuthInfo.phone

@@ -14,6 +14,20 @@ export class CreateUserDto {
     @IsNotEmpty()
     @IsMongoId()
     role: mongoose.Schema.Types.ObjectId;
+
+    gender: string;
+
+    birthday: Date;
+
+    level: string;
+
+    academic: string;
+
+    experience: string;
+
+    achievements: string;
+
+    address: string;
 }
 
 export class RegisterUserDto {
